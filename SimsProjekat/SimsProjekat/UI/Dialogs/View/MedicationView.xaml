@@ -1,0 +1,168 @@
+﻿<Window x:Class="SimsProjekat.UI.Dialogs.View.MedicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimsProjekat.UI.Dialogs.View"
+        xmlns:converters="clr-namespace:SimsProjekat.CompositeCommon.Converters"
+        mc:Ignorable="d"
+        Title="MedicationView" Height="500" Width="1120">
+    <Window.Resources>
+        <converters:DialogStateToEnabledConverter x:Key="DialogStateToEnabledConverter"/>
+    </Window.Resources>
+    <Grid Margin="0,-2,0,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button Content="Add Medication" Command="{Binding AddCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16" IsEnabled="{Binding IsEnabled}"/>
+            <Button Content="Edit Medication" Command="{Binding EditCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16" IsEnabled="{Binding IsEnabledForOnlyPatient}"/>
+            <Button Content="Delete Medication" Command="{Binding DeleteCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16" IsEnabled="{Binding IsEnabled}"/>
+            <Button Content="OK" Command="{Binding OkCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+            <Button Content="Buy medicine" Command="{Binding ShowBuyMedicationCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16" IsEnabled="{Binding IsEnabledForPharmacist}"/>
+            <Button Content="Finsih shopping" Command="{Binding FinishShoppingCommand}"  HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16" IsEnabled="{Binding IsEnabledForPharmacist}"/>
+        </StackPanel>
+
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+              
+
+
+                    <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Button Content="Search" Command="{Binding FindCommand}" Width="70"/>
+                                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"  Width="60"/>
+                                <Label Content="From"/>
+                                <TextBox Text="{Binding PriceFrom, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                                <Label Content="To"/>
+                                <TextBox Text="{Binding PriceTo, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                                
+                            </StackPanel>
+                            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                <Button  Width="100" Content="Search ingredients" Command="{Binding  SearchIngredientsCommand}"/>
+                            <TextBox  Width="75" Text="{Binding SearchTerm , UpdateSourceTrigger=PropertyChanged}"/>
+                                <Button Content="Search by price range"  Command="{Binding SearchByPriceCommand}"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </StackPanel>
+
+                    <StackPanel  Grid.Column="0" Grid.Row="1">
+                        <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Producer" Binding="{Binding Producer}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Price"  Binding="{Binding Price}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Accepted"  Binding="{Binding Accepted}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Id"  Binding="{Binding Id}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Explonation"  Binding="{Binding Explonation}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Deleted"  Binding="{Binding Deleted}"  ></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel  Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <ComboBox Width="80" ItemsSource="{Binding Ingredients}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding Ingredient}"/>
+                                <TextBox Text="{Binding IngredientQuantity}" Width="80"/>
+                                <Button Content="OK" Width="60" Command="{Binding AddIngredientCommand}"/>
+                            </StackPanel>
+
+                        </Grid>
+
+
+                        <DataGrid ItemsSource="{Binding MedicationItems}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding IngQuantity}"/>
+                                <DataGridTextColumn Header="Ingredient" Binding="{Binding Ingredient}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                </Grid>
+
+
+                <Grid Grid.Row="1" IsEnabled="{Binding DialogState, Converter={StaticResource DialogStateToEnabledConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Password:" Grid.Row="0" Grid.Column="0" />
+                    <Label Content="Name:" Grid.Row="1" Grid.Column="0" />
+                    <Label Content="Producer:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="Price:" Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="Quantity:" Grid.Row="4" Grid.Column="0"/>
+                    <Label Content="Accepted:" Grid.Row="5" Grid.Column="0"/>
+                    <Label Content="Id:" Grid.Row="6" Grid.Column="0"/>
+                    <Label Content="Explonation:" Grid.Row="7" Grid.Column="0"/>
+                    <Label Content="Deleted:" Grid.Row="8" Grid.Column="0"/>
+
+                    <TextBox Text="{Binding SelectedItem.Password}" Grid.Row="0" Grid.Column="1" TabIndex="0" Width="250" IsEnabled="{Binding IsEnabled}"/>
+                    <TextBox Text="{Binding SelectedItem.Name}"  Grid.Row="1" Grid.Column="1" Width="250" IsEnabled="{Binding IsEnabled}"/>
+                    <TextBox Text="{Binding SelectedItem.Producer}"  Grid.Row="2" Grid.Column="1" Width="250" IsEnabled="{Binding IsEnabled}"/>
+                    <TextBox Text="{Binding SelectedItem.Price}"  Grid.Row="3" Grid.Column="1" Width="250" IsEnabled="{Binding IsEnabled}"/>
+                    <TextBox Text="{Binding SelectedItem.Quantity}"  Grid.Row="4" Grid.Column="1" Width="250" IsEnabled="{Binding IsEnabled}"/>
+                    <CheckBox Content="Check" IsChecked="{Binding SelectedItem.Accepted}" IsEnabled="{Binding IsEnabledForPatient}" Grid.Row="5" Grid.Column="1"/>
+                    <TextBox Text="{Binding SelectedItem.Id}"  Grid.Row="6" Grid.Column="1" Width="250" IsEnabled="{Binding IsEnabled}"/>
+                    <TextBox Text="{Binding SelectedItem.Explonation}"  IsEnabled="{Binding IsEnabledForPatient}"  Grid.Row="7" Grid.Column="1" Width="250"/>
+                    <CheckBox Content="Check" IsEnabled="{Binding IsEnabled}"  IsChecked="{Binding SelectedItem.Deleted}" Grid.Row="8" Grid.Column="1"/>
+
+                </Grid>
+            </Grid>
+            </Grid>
+        </Grid>
+</Window>

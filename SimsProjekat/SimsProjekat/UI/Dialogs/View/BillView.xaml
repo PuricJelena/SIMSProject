@@ -1,0 +1,142 @@
+﻿<Window x:Class="SimsProjekat.UI.Dialogs.View.BillView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimsProjekat.UI.Dialogs.View"
+        xmlns:converters="clr-namespace:SimsProjekat.CompositeCommon.Converters"
+        mc:Ignorable="d"
+        Title="BillView" Height="450" Width="800">
+    <Window.Resources>
+        <converters:DialogStateToEnabledConverter x:Key="DialogStateToEnabledConverter"/>
+    </Window.Resources>
+    <Grid Margin="0,-2,0,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button Content="Add Bill" Command="{Binding AddCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+            <Button Content="Edit Bill" Command="{Binding EditCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+            <Button Content="Delete Bill" Command="{Binding DeleteCommand}"  HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+            <Button Content="OK" Command="{Binding OkCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Width="200" Height="36" Background="#FF80F3C9" FontWeight="Bold" FontSize="16"/>
+        </StackPanel>
+
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                
+            </StackPanel>
+
+
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid VerticalAlignment="Top" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Button Content="Search" Command="{Binding FindCommand}" Width="70"/>
+                                <TextBox Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"  Width="60"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                    <StackPanel  VerticalAlignment="Top" Grid.Column="0" Grid.Row="1">
+                        <DataGrid VerticalAlignment="Top" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Pharmacist" Binding="{Binding Pharmacist}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Date" Binding="{Binding DateAndTime}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Total price" Binding="{Binding TotalPrice}"></DataGridTextColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel  Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <ComboBox Width="80" ItemsSource="{Binding Medications}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding Medication}"/>
+                                <TextBox Text="{Binding MedicationQuantity}" Width="80"/>
+                                <Button Content="OK" Width="60" Command="{Binding AddMedicationCommand}"/>
+                            </StackPanel>
+
+                        </Grid>
+
+
+                        <DataGrid  ItemsSource="{Binding BillItems}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn Header="Medication" Binding="{Binding Medication}"/>
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding MedQuantity}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2" IsEnabled="{Binding DialogState, Converter={StaticResource DialogStateToEnabledConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Password:" Grid.Row="0" Grid.Column="0" />
+                    <Label Content="Pharmacist:" Grid.Row="1" Grid.Column="0" />
+                    <Label Content="Date:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="Medication's quantity" Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="Total price" Grid.Row="4" Grid.Column="0"/>
+                    <TextBox Text="{Binding SelectedItem.Password}" Grid.Row="0" Grid.Column="1" TabIndex="0" Width="250"/>
+                    <ComboBox ItemsSource="{Binding Pharmacists}" DisplayMemberPath="Name" SelectedValuePath="Value"
+                          SelectedValue="{Binding SelectedItem.Pharmacist}" Grid.Row="1" Grid.Column="1" Width="250"/>
+                    <DatePicker SelectedDate="{Binding SelectedItem.DateAndTime}"  Grid.Row="2" Grid.Column="1" Width="250"/>
+                    <TextBox Text="{Binding SelectedItem.Password}"  Grid.Row="3" Grid.Column="1" Width="250"/>
+                    <TextBox Text="{Binding SelectedItem.TotalPrice}"  Grid.Row="4" Grid.Column="1" Width="250"/>
+
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </Grid>
+</Window>
