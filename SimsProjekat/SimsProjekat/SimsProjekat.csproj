@@ -56,9 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\LogInUser.cs" />
     <Compile Include="Persistance\BillRepository.cs" />
-    <Compile Include="Persistance\LoginUserRepository.cs" />
     <Compile Include="Persistance\UserRepository.cs" />
     <Compile Include="Service\BillService.cs" />
     <Compile Include="Service\IngredientService.cs" />
@@ -81,7 +79,6 @@
     <Compile Include="UI\Dialogs\ViewModel\BuyMedicationViewModel.cs" />
     <Compile Include="UI\Dialogs\ViewModel\IngredientViewModel.cs" />
     <Compile Include="UI\Dialogs\ViewModel\MedicationViewModel.cs" />
-    <Compile Include="UI\Dialogs\ViewModel\PatientViewModel.cs" />
     <Compile Include="UI\Dialogs\ViewModel\UserViewModel.cs" />
     <Compile Include="UI\Dialogs\View\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
@@ -94,9 +91,6 @@
     </Compile>
     <Compile Include="UI\Dialogs\View\MedicationView.xaml.cs">
       <DependentUpon>MedicationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\View\PatientView.xaml.cs">
-      <DependentUpon>PatientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
@@ -141,10 +135,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\View\MedicationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\View\PatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

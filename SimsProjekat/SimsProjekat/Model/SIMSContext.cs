@@ -15,7 +15,6 @@ namespace SimsProjekat.Model
         private List<Entity> medications;
         private List<Entity> bills;
         private List<Entity> ingredients;
-        private List<Entity> loginUsers;
         private List<Entity> billsItems;
         private User user;
         private Bill bill;
@@ -78,11 +77,7 @@ namespace SimsProjekat.Model
             set { ingredients = value; }
         }
 
-        public List<Entity> LoginUsers
-        {
-            get { return loginUsers; }
-            set { loginUsers = value; }
-        }
+    
 
         public List<Entity> BillsItems
         {
@@ -106,10 +101,7 @@ namespace SimsProjekat.Model
             {
                 return Bills;
             }
-            if(type == typeof(LogInUser))
-            {
-                return loginUsers;
-            }
+         
             if(type == typeof(BillItem))
             {
                 return billsItems;
@@ -137,11 +129,7 @@ namespace SimsProjekat.Model
                 Bills = entities;
                 return;
             }
-            if(type == typeof(LogInUser))
-            {
-                loginUsers = entities;
-                return;
-            }
+        
             if(type == typeof(BillItem))
             {
                 billsItems = entities;
@@ -157,41 +145,13 @@ namespace SimsProjekat.Model
             LoadMedications();
             LoadBills();
             LoadUsers();
-            LoadLogInUsers();
+          
          
         }
 
 
 
-        public void LoadLogInUsers()
-        {
-            List<Entity> loginUsersList = new List<Entity>();
 
-            if (!File.Exists("loginUser.txt"))
-            {
-                loginUsers = loginUsersList;
-                return;
-            }
-
-            StreamReader reader = new StreamReader("loginUser.txt");
-            string line;
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                string[] data = line.Split('|');
-
-                LogInUser loginUser = new LogInUser();
-
-                loginUser.LoginUsername = data[0];
-                loginUser.LoginPassword = data[1];
-               
-                loginUsersList.Add(loginUser);
-
-
-            }
-            reader.Close();
-            loginUsers = loginUsersList;
-        }
 
         public void LoadUsers() 
         {
@@ -362,32 +322,11 @@ namespace SimsProjekat.Model
             SaveBills();
             SaveIngredients();
             SaveMedications();
-            SaveLoginUsers();
+        
         }
 
 
-        public void SaveLoginUsers()
-        {
-            if (loginUsers == null)
-            {
-                return;
-            }
-
-            using (StreamWriter file = new StreamWriter("loginUser.txt"))
-            {
-                foreach (Entity entity in loginUsers)
-                {
-                    string line = string.Empty;
-
-                    line += ((LogInUser)entity).LoginUsername + "|";
-                    line += ((LogInUser)entity).LoginPassword + "|";
-                
-
-                    file.WriteLine(line);
-                }
-                file.Close();
-            }
-        }
+      
 
         public void SaveUsers() 
         {
